@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VSTDA API</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+</head>
+
+<body ng-controller="todoController">
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <form name="todoEntryForm" role="form">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Add Todo Item</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="todoText">Text</label>
+                                <input type="text" class="form-control" ng-model="newTodo.text" placeholder="Insert New Task">
+                            </div>
+                            <div class="form-group">
+                                <label for="todoPriority">Priority</label>
+                                <select id="todoPriority" ng-model="newTodo.priority" class="form-control">
+                                    <option value="1">High</option>
+                                    <option value="2">Normal</option>
+                                    <option value="3">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-primary" ng-click="addTodo()">Add Todo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="btn-group">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" ng-click="orderMethod = 'priority'">Order by highest priority</button>
+                        <button type="button" class="btn btn-primary" ng-click="orderMethod = '-priority'">Order by lowest priority</button>
+                        <button type="button" class="btn btn-primary" ng-click="orderMethod = 'text'">Order by alphabetically</button>
+                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="todo in todos | orderBy:orderMethod" ng-class="{'danger' : {{todo.priority}} === 1, 'warning' : {{todo.priority}} === 2, 'info' : {{todo.priority}} === 3}" ng-mouseenter="togglevis()" ng-mouseleave="togglevis()">
+                                <td>
+                                  <div>
+                                    <h5 editable-text="todo.text" href="#" onaftersave="updateTodo(todo)">{{todo.text}} <button type="button" class="btn btn-danger btn pull-right" ng-click="delete(todo)" ng-show="visible">Delete</button></h5>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- inject:js -->
+        <script src="/app/app.js"></script>
+        <script src="/app/controller.js"></script>
+        <script src="/app/factory.js"></script>
+        <!-- endinject -->
+</body>
+
+</html>

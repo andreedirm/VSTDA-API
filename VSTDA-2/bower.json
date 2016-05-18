@@ -1,0 +1,15 @@
+{
+  "name": "VSTDA-2",
+  "authors": [
+    "andreedirm <andre.edirm@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "x-editable": "^1.5.1"
+  }
+}
